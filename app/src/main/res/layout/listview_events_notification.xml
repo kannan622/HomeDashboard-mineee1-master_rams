@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="27dp"
+
+        android:text="Events"
+        android:textColor="#666666"
+        android:textSize="28sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:id="@+id/rel_parent"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@+id/message"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="30dp"
+        android:background="@drawable/rect">
+
+
+        <TextView
+            android:id="@+id/latest"
+
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+
+
+            android:paddingLeft="30dp"
+
+            android:paddingTop="10dp"
+            android:text="Latest Events"
+
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold"
+
+
+            />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/members_wise"
+            android:background="@color/colorPrimary"></View>
+
+        <TextView
+            android:id="@+id/upcoming"
+
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_toRightOf="@+id/members_wise"
+
+            android:layout_weight="1"
+            android:paddingLeft="35dp"
+
+            android:paddingTop="10dp"
+            android:text="Upcoming Events"
+
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold"
+
+            />
+
+    </LinearLayout>
+
+    <RelativeLayout
+
+        android:id="@+id/rel_from_lang"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rel_parent"
+        android:layout_marginTop="10dp"
+        android:visibility="invisible">
+
+        <include layout="@layout/list_view_page"></include>
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+
+        android:id="@+id/rel_to_lang"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rel_parent"
+        android:layout_marginTop="10dp"
+        android:visibility="invisible">
+
+        <include layout="@layout/list_view_page1"></include>
+
+
+    </RelativeLayout>
+
+
+    <!--  <ListView
+          android:id="@+id/mycardlistview"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_below="@+id/rel_parent"
+          android:layout_marginTop="15dp"
+          android:cacheColorHint="@android:color/transparent"
+          android:choiceMode="multipleChoice"
+          android:divider="@null"
+          android:dividerHeight="1dp"
+          android:listSelector="@android:color/transparent"
+          android:padding="1dp"
+          ></ListView>-->
+
+
+</RelativeLayout>

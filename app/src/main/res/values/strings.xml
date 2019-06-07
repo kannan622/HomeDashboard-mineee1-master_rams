@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">HomeDashboard</string>
+    <string name="title_activity_login">Sign in</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password (optional)</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+
+    <string name="connection_message">No Internet Connection</string>
+    <string name="about">"Chennai Civil Engineers Association (CHECEA) is a vibrant body composed of expert professionals in the field of Civil Engineering. The evolution of Chennai, one of the renowned industrial hubs of south India, from an unknown and undeveloped piece of land into a region of phenomenal growth in all the spheres of activity, from textiles companies and colleges to hospitals and SME units, can be attributed to the unceasing and ingenious efforts of this elite Association. It can also be said that the infrastructural history of Chennai cannot be narrated without making important references frequently to this closely knit, knowledge centric Association. As a matter of fact and pride, many of the prominent infrastructures in this city are designed and developed by its members.
+
+CHECEA is founded on the principles of meticulous professionalism, and irreproachable ethical standards. These twin objectives have been guiding forces of it since the day the Association was conceived by its members.
+
+CHECEA believes that in future it has greater role to play and more responsibility to bear in the context of creating infrastructures that will make this city more elegant and more productive, making Chennai the most favourable industrial and residential destination in India."
+    </string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+</resources>
