@@ -105,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
 
                 if (position == 3) {
                     if (Network_config.is_Network_Connected_flag(getApplicationContext())) {
-                        Intent myIntent = new Intent(view.getContext(), Events.class);
+                        Intent myIntent = new Intent(view.getContext(), Events_Notification.class);
                         startActivityForResult(myIntent, 0);
                     } else {
                         Network_config.customAlert(dialog, getApplicationContext(), getResources().getString(R.string.app_name),

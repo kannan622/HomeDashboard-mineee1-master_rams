@@ -216,6 +216,13 @@ public class Associations extends AppCompatActivity {
 
                         }
 
+                        if (status.matches("500")) {
+
+
+                            Toast.makeText(getApplicationContext(), "No data found", Toast.LENGTH_SHORT).show();
+
+                        }
+
 
                         // Getting JSON Array node
 

@@ -60,7 +60,7 @@
             android:layout_toRightOf="@+id/members_wise"
 
             android:layout_weight="1"
-            android:paddingLeft="35dp"
+            android:paddingLeft="15dp"
 
             android:paddingTop="10dp"
             android:text="Upcoming Events"

@@ -73,18 +73,26 @@ public class Adapter_card_listview_events extends BaseAdapter {
         LayoutInflater inflater = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         if (convertView == null) {
-            convertView = inflater.inflate(R.layout.office_bearers, null);
+            convertView = inflater.inflate(R.layout.events, null);
         }
 
-        final TextView nameTxt = convertView.findViewById(R.id.name_text);
-        TextView position_ = convertView.findViewById(R.id.position);
-        TextView location_ = convertView.findViewById(R.id.location);
-        TextView phone_ = convertView.findViewById(R.id.phone);
+        final TextView title = convertView.findViewById(R.id.title_);
+        TextView date = convertView.findViewById(R.id.date);
+        TextView venue = convertView.findViewById(R.id.location);
+
+
+        TextView chairman_name_value = convertView.findViewById(R.id.chairman_name_value);
+        TextView chairman_mobileno_value = convertView.findViewById(R.id.chairman_mobileno_value);
+        TextView cochairman_mobileno_value = convertView.findViewById(R.id.cochairman_mobileno_value);
 
 
         //SET DATA TO THEM
-        nameTxt.setText((players.get(pos).gettitle()));
-
+        title.setText((players.get(pos).gettitle()));
+        date.setText((players.get(pos).getdate()));
+        venue.setText((players.get(pos).getvenue()));
+        chairman_name_value.setText((players.get(pos).getmeeting_chairman()));
+        chairman_mobileno_value.setText((players.get(pos).getmobile_no_meeting_chairman()));
+        cochairman_mobileno_value.setText((players.get(pos).getco_chairman()));
 
 
         return convertView;

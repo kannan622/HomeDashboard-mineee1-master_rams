@@ -31,7 +31,10 @@ public class Events_Notification extends AppCompatActivity {
     String status;
     public ArrayList<events_model> countries_lang = new ArrayList<events_model>();
 
+    public ArrayList<zone_area_model> countries_lang_area = new ArrayList<zone_area_model>();
+
     Adapter_card_listview_events adapt;
+    Adapter_card_listview_zonewise_area adapt_area;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +54,6 @@ public class Events_Notification extends AppCompatActivity {
 
         textview_latest = findViewById(R.id.latest);
         textview_upcoming = findViewById(R.id.upcoming);
-
 
 
         textview_latest.setBackgroundResource(R.drawable.rect_color);
@@ -110,7 +112,27 @@ public class Events_Notification extends AppCompatActivity {
             public void onClick(View view) {
 
 
+                if (Network_config.is_Network_Connected_flag(getApplicationContext())) {
 
+                    csprogress.setMessage("Loading...");
+                    csprogress.show();
+                    csprogress.setCanceledOnTouchOutside(false);
+                    new android.os.Handler().postDelayed(new Runnable() {
+
+                        @Override
+                        public void run() {
+                            //csprogress.dismiss();
+//whatever you want just you have to launch overhere.
+
+
+                        }
+                    }, 0);//just mention the time when you want to launch your action
+                    //new Gettransaction_form_send().execute();
+                    new GetContacts_notification().execute();
+                } else {
+                    Network_config.customAlert(dialog, getApplicationContext(), getResources().getString(R.string.app_name),
+                            getResources().getString(R.string.connection_message));
+                }
 
                 textview_latest.setBackgroundResource(R.drawable.rect_whiteborder);
                 textview_upcoming.setBackgroundResource(R.drawable.rect_color);
@@ -139,7 +161,7 @@ public class Events_Notification extends AppCompatActivity {
             Handler_ sh = new Handler_(getApplicationContext());
 
             // Making a request to url and getting response
-            String jsonStr = sh.makeServiceCall_login(Iconstant.office_bear, "", "");
+            String jsonStr = sh.makeServiceCall_login(Iconstant.events, "", "");
 
             Log.e("", "Response from url: " + jsonStr);
 
@@ -169,15 +191,17 @@ public class Events_Notification extends AppCompatActivity {
 
                             JSONObject c = myresult.getJSONObject(i);
 
-                           /* String first_name = c.getString("membername");
+                            String title = c.getString("title");
 
 
-                            String position = c.getString("member_type");
-                            String address = c.getString("officeaddress1");
-                            String phonenumber = c.getString("mobilenumber1");*/
+                            String date = c.getString("date");
+                            String venue = c.getString("venue");
+                            String meeting_chairman = c.getString("meeting_chairman");
+                            String mobile_no_meeting_chairman = c.getString("mobile_no_meeting_chairman");
+                            String co_chairman_details = c.getString("co_chairman_details");
 
 
-                            lan = new events_model("", "", "", "","","");
+                            lan = new events_model(title, date, venue, meeting_chairman, mobile_no_meeting_chairman, co_chairman_details);
 
                             countries_lang.add(lan);
 
@@ -225,6 +249,119 @@ public class Events_Notification extends AppCompatActivity {
                 }
 
             } catch (Exception e) {
+                if (csprogress.isShowing()) {
+                    csprogress.dismiss();
+                }
+
+
+                e.printStackTrace();
+                Toast.makeText(getApplicationContext(), "Failed to connect,Please Try again", Toast.LENGTH_SHORT).show();
+            }
+
+
+        }
+
+
+    }
+
+    private class GetContacts_notification extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+
+        @Override
+        protected Void doInBackground(Void... arg0) {
+            Handler_ sh = new Handler_(getApplicationContext());
+
+            // Making a request to url and getting response
+            String jsonStr = sh.makeServiceCall_login(Iconstant.notification, "", "");
+
+            Log.e("", "Response from url: " + jsonStr);
+
+
+            if (jsonStr != null) {
+                try {
+                    JSONObject jsonObj = new JSONObject(jsonStr);
+
+
+                    status = jsonObj.getString("Status");
+
+
+                    if (status.matches("200")) {
+                        JSONArray myresult = jsonObj.getJSONArray("Data");
+                        try {
+                            if (countries_lang_area != null) {
+                                countries_lang_area.clear();
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
+                        // looping through All Contacts
+                        for (int i = 0; i < myresult.length(); i++) {
+                            zone_area_model lan_area;
+
+
+                            JSONObject c = myresult.getJSONObject(i);
+
+                            String tiltle = c.getString("tiltle");
+
+
+                            lan_area = new zone_area_model(tiltle);
+
+                            countries_lang_area.add(lan_area);
+
+
+                        }
+                    }
+
+
+                    // Getting JSON Array node
+
+
+                    // Getting JSON Array node
+
+                } catch (final JSONException e) {
+
+
+                }
+            } else {
+
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            super.onPostExecute(result);
+
+            try {
+                if (csprogress.isShowing()) {
+                    csprogress.dismiss();
+                }
+
+
+                if (status.matches("200")) {
+                    adapt_area = new Adapter_card_listview_zonewise_area(getApplicationContext(), countries_lang_area);
+
+                    // offers_count.setText("We have " + countries_lang.size() + " offers for you!");
+
+                    lv1.setAdapter(adapt_area);
+                }
+                if (status.matches("401")) {
+                    Toast.makeText(getApplicationContext(), "Invalid ", Toast.LENGTH_SHORT).show();
+
+
+                }
+
+            } catch (Exception e) {
+                if (csprogress.isShowing()) {
+                    csprogress.dismiss();
+                }
 
                 e.printStackTrace();
                 Toast.makeText(getApplicationContext(), "Failed to connect,Please Try again", Toast.LENGTH_SHORT).show();

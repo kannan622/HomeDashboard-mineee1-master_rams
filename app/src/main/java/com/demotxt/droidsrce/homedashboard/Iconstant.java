@@ -34,6 +34,10 @@ public class Iconstant {
     public static String chennaizone = baseurl + "web_services/zone_wise_members.php";
     public static String events = baseurl + "web_services/events.php";
 
+    public static String notification = baseurl + "web_services/notifications.php";
+
+
+
     public static String role_of_honour = baseurl + "web_services/role_of_honour.php";
 
     public static String president_msg = baseurl + "web_services/feceat_president.php";
