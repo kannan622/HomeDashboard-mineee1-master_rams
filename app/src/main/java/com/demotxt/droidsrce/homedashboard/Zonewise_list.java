@@ -436,7 +436,9 @@ public class Zonewise_list extends AppCompatActivity {
 
             try {
 
-
+                if (csprogress.isShowing()) {
+                    csprogress.dismiss();
+                }
                 if (status.matches("200")) {
                     adapt_area = new Adapter_card_listview_zonewise_area(getApplicationContext(), countries_lang_area);
 
@@ -451,7 +453,9 @@ public class Zonewise_list extends AppCompatActivity {
                 }
 
             } catch (Exception e) {
-
+                if (csprogress.isShowing()) {
+                    csprogress.dismiss();
+                }
                 e.printStackTrace();
                 Toast.makeText(getApplicationContext(), "Failed to connect,Please Try again", Toast.LENGTH_SHORT).show();
             }
@@ -548,7 +552,9 @@ public class Zonewise_list extends AppCompatActivity {
 
             try {
 
-
+                if (csprogress.isShowing()) {
+                    csprogress.dismiss();
+                }
                 if (status.matches("200")) {
                     adapt = new Adapter_card_listview_zonewise(getApplicationContext(), countries_lang);
 
@@ -563,7 +569,9 @@ public class Zonewise_list extends AppCompatActivity {
                 }
 
             } catch (Exception e) {
-
+                if (csprogress.isShowing()) {
+                    csprogress.dismiss();
+                }
                 e.printStackTrace();
                 Toast.makeText(getApplicationContext(), "Failed to connect,Please Try again", Toast.LENGTH_SHORT).show();
             }
@@ -654,7 +662,9 @@ public class Zonewise_list extends AppCompatActivity {
 
             try {
 
-
+                if (csprogress.isShowing()) {
+                    csprogress.dismiss();
+                }
                 if (status.matches("200")) {
                     adapt_area = new Adapter_card_listview_zonewise_area(getApplicationContext(), countries_lang_area);
 
@@ -669,7 +679,9 @@ public class Zonewise_list extends AppCompatActivity {
                 }
 
             } catch (Exception e) {
-
+                if (csprogress.isShowing()) {
+                    csprogress.dismiss();
+                }
                 e.printStackTrace();
                 Toast.makeText(getApplicationContext(), "Failed to connect,Please Try again", Toast.LENGTH_SHORT).show();
             }
@@ -765,7 +777,9 @@ public class Zonewise_list extends AppCompatActivity {
             super.onPostExecute(result);
 
             try {
-
+                if (csprogress.isShowing()) {
+                    csprogress.dismiss();
+                }
 
                 if (status.matches("200")) {
                     adapt = new Adapter_card_listview_zonewise(getApplicationContext(), countries_lang);
@@ -781,7 +795,9 @@ public class Zonewise_list extends AppCompatActivity {
                 }
 
             } catch (Exception e) {
-
+                if (csprogress.isShowing()) {
+                    csprogress.dismiss();
+                }
                 e.printStackTrace();
                 Toast.makeText(getApplicationContext(), "Failed to connect,Please Try again", Toast.LENGTH_SHORT).show();
             }
@@ -872,7 +888,9 @@ public class Zonewise_list extends AppCompatActivity {
 
             try {
 
-
+                if (csprogress.isShowing()) {
+                    csprogress.dismiss();
+                }
                 if (status.matches("200")) {
                     adapt_area = new Adapter_card_listview_zonewise_area(getApplicationContext(), countries_lang_area);
 
@@ -887,7 +905,9 @@ public class Zonewise_list extends AppCompatActivity {
                 }
 
             } catch (Exception e) {
-
+                if (csprogress.isShowing()) {
+                    csprogress.dismiss();
+                }
                 e.printStackTrace();
                 Toast.makeText(getApplicationContext(), "Failed to connect,Please Try again", Toast.LENGTH_SHORT).show();
             }

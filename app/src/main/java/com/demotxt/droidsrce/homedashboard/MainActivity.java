@@ -12,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -116,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
 
                 if (position == 4) {
                     if (Network_config.is_Network_Connected_flag(getApplicationContext())) {
-                        Intent myIntent = new Intent(view.getContext(), Sponcers.class);
+                        Intent myIntent = new Intent(view.getContext(), ScrollableTabsActivity.class);
                         startActivityForResult(myIntent, 0);
                     } else {
                         Network_config.customAlert(dialog, getApplicationContext(), getResources().getString(R.string.app_name),

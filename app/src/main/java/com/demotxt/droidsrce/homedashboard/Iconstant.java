@@ -44,6 +44,10 @@ public class Iconstant {
     public static String associations = baseurl + "web_services/associations.php";
     public static String joinus = baseurl + "web_services/join_us.php";
 
+    public static String sponsors = baseurl + "web_services/sponsors.php";
+
+
+
 
     public static String category_list = baseurl + "form/get";
 

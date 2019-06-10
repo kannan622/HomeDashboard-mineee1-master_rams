@@ -6,8 +6,12 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -26,40 +30,50 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
-public class Associations extends AppCompatActivity {
 
-    public ArrayList<association_model> countries_lang = new ArrayList<association_model>();
+public class FourFragment extends Fragment {
+
+
+    public ArrayList<sponsorsmodel> countries_lang = new ArrayList<sponsorsmodel>();
     String status;
-    Adapter_card_listview_association adapt;
+    Adapter_sponsors adapt;
 
     String fin_result;
     static int statuscode;
 
-    ListView lv;
+    GridView lv;
     Dialog dialog;
     ProgressDialog csprogress;
     static String type;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.list_view);
+    public FourFragment() {
+        // Required empty public constructor
+    }
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+
+        View recordView = inflater.inflate(R.layout.recyclerview, container, false);
         if (android.os.Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy policy = new
                     StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
         }
-        dialog = new Dialog(getApplicationContext());
-        csprogress = new ProgressDialog(Associations.this);
-        lv = findViewById(R.id.mycardlistview);
+        dialog = new Dialog(getActivity());
+        csprogress = new ProgressDialog(getActivity());
+        lv = recordView.findViewById(R.id.grid);
 
-        Intent intent = this.getIntent();
-        if (intent != null)// to avoid the NullPointerException
 
-            type = intent.getStringExtra("type");
+        type = ("Silver");
 
-        if (Network_config.is_Network_Connected_flag(getApplicationContext())) {
+        if (Network_config.is_Network_Connected_flag(getActivity())) {
 
             csprogress.setMessage("Loading...");
             csprogress.show();
@@ -75,12 +89,16 @@ public class Associations extends AppCompatActivity {
                 }
             }, 0);//just mention the time when you want to launch your action
             //new Gettransaction_form_send().execute();
-            new HttpAsyncTask().execute(Iconstant.associations);
+            new HttpAsyncTask().execute(Iconstant.sponsors);
         } else {
-            Network_config.customAlert(dialog, getApplicationContext(), getResources().getString(R.string.app_name),
+            Network_config.customAlert(dialog, getActivity(), getResources().getString(R.string.app_name),
                     getResources().getString(R.string.connection_message));
         }
+
+
+        return recordView;
     }
+
 
     public static String POST_flag_launch(String url) {
         InputStream inputStream = null;
@@ -104,7 +122,7 @@ public class Associations extends AppCompatActivity {
             // JSONArray jsonarr = new JSONArray();
 
 
-            jsonObject.accumulate("region_name", type);
+            jsonObject.accumulate("type", type);
 
             // jsonObject.accumulate("category", session.getUserDetails().get(SessionManager.KEY_category_id));
 
@@ -219,7 +237,7 @@ public class Associations extends AppCompatActivity {
                         if (status.matches("500")) {
 
 
-                            Toast.makeText(getApplicationContext(), "No data found", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "No data found", Toast.LENGTH_SHORT).show();
 
                         }
 
@@ -234,7 +252,7 @@ public class Associations extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 } else {
-                    Toast.makeText(getApplicationContext(), "Failed to connect", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Failed to connect", Toast.LENGTH_SHORT).show();
 
                 }
 
@@ -246,6 +264,7 @@ public class Associations extends AppCompatActivity {
         }
     }
 
+
     private class GetContacts_region extends AsyncTask<Void, Void, Void> {
 
         @Override
@@ -256,7 +275,7 @@ public class Associations extends AppCompatActivity {
 
         @Override
         protected Void doInBackground(Void... arg0) {
-            Handler_ sh = new Handler_(getApplicationContext());
+            Handler_ sh = new Handler_(getActivity());
 
             // Making a request to url and getting response
 
@@ -284,16 +303,19 @@ public class Associations extends AppCompatActivity {
 
                         // looping through All Contacts
                         for (int i = 0; i < myresult.length(); i++) {
-                            association_model lan;
+                            sponsorsmodel lan;
 
 
                             JSONObject c = myresult.getJSONObject(i);
 
 
-                            String assocaition_name = c.getString("asso_name");
+                            String name = c.getString("name");
+                            String link = c.getString("link");
+                            String image = c.getString("image");
 
 
-                            lan = new association_model(assocaition_name);
+
+                            lan = new sponsorsmodel(name,link,image);
 
                             countries_lang.add(lan);
 
@@ -323,19 +345,19 @@ public class Associations extends AppCompatActivity {
             super.onPostExecute(result);
 
             try {
+
                 if (csprogress.isShowing()) {
                     csprogress.dismiss();
                 }
-
                 if (status.matches("200")) {
-                    adapt = new Adapter_card_listview_association(getApplicationContext(), countries_lang);
+                    adapt = new Adapter_sponsors(getActivity(), countries_lang);
 
                     // offers_count.setText("We have " + countries_lang.size() + " offers for you!");
 
                     lv.setAdapter(adapt);
                 }
                 if (status.matches("401")) {
-                    Toast.makeText(getApplicationContext(), "Invalid ", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Invalid ", Toast.LENGTH_SHORT).show();
 
 
                 }
@@ -345,7 +367,7 @@ public class Associations extends AppCompatActivity {
                     csprogress.dismiss();
                 }
                 e.printStackTrace();
-                Toast.makeText(getApplicationContext(), "Failed to connect,Please Try again", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Failed to connect,Please Try again", Toast.LENGTH_SHORT).show();
             }
 
 
@@ -353,4 +375,5 @@ public class Associations extends AppCompatActivity {
 
 
     }
+
 }

@@ -172,7 +172,9 @@ public class Roll_of_Honours extends AppCompatActivity {
                 }
 
             } catch (Exception e) {
-
+                if (csprogress.isShowing()) {
+                    csprogress.dismiss();
+                }
                 e.printStackTrace();
                 Toast.makeText(getApplicationContext(), "Failed to connect,Please Try again", Toast.LENGTH_SHORT).show();
             }
